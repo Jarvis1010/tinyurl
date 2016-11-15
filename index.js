@@ -1,11 +1,7 @@
 var express=require('express');
 var app=express();
 var mongo=require('mongodb').MongoClient;
-var bodyParser=require('body-parser');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-var urlencod=bodyParser.urlencoded();
 var port = process.env.PORT||8080;
 
 app.get('/', function(req,res){
