@@ -5,7 +5,7 @@ var mongo=require('mongodb').MongoClient;
 var port = process.env.PORT||8080;
 
 app.get('/', function(req,res){
-    res.send("To use this API, use the follwing format at end of above URL '/new/<fullURL>' and JSON of your header info.");
+    res.send("To use this API, use the following format at end of above URL '/new/--fullURL--' and JSON of your new URL will return.");
 });
 //export MONGOLAB_URI="mongodb://<dbuser>:<dbpassword>@ds153657.mlab.com:53657/tinyurl"
 app.get('/new/:url*',function(req,res){
