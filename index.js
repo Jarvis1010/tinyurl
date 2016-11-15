@@ -11,13 +11,13 @@ var port = process.env.PORT||8080;
 app.get('/', function(req,res){
     res.send("To use this API, use the follwing format at end of above URL '/new/<fullURL>' and JSON of your header info.");
 });
-
+//export MONGOLAB_URI="mongodb://<dbuser>:<dbpassword>@ds153657.mlab.com:53657/tinyurl"
 app.get('/new/:url*',function(req,res){
     var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
     var regex = new RegExp(expression);
     var url=req.url.slice(5);
     if(url.match(regex)){
-        var dbURL="mongodb://localhost:27017/tinyurl";
+        var dbURL=process.env.MONGOLAB_URI;
         mongo.connect(dbURL,function(err,db){
             if(!err){
                 db.collection('urls').find({'url':url}).toArray(function(err,result){
@@ -50,7 +50,7 @@ app.get('/new/:url*',function(req,res){
 
 
 app.get("/:url",function(req,res){
-    var dbURL="mongodb://localhost:27017/tinyurl";
+    var dbURL=process.env.MONGOLAB_URI;
     mongo.connect(dbURL,function(err,db){
         if(err){
             res.send(err);
